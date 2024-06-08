@@ -837,13 +837,13 @@ public class Check {
      *  @return  the (possibly empty) JCList of non-denotable types.
      */
     JCList<Type> checkDiamondDenotable(ClassType t) {
-        JCListBuffer<Type> buf = new JCListBuffer<>();
+        ListBuffer<Type> buf = new ListBuffer<>();
         for (Type arg : t.allparams()) {
             if (!diamondTypeChecker.visit(arg, null)) {
                 buf.append(arg);
             }
         }
-        return buf.toJCList();
+        return buf.toList();
     }
         // where
 

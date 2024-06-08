@@ -2684,7 +2684,7 @@ public class Attr extends JCTree.Visitor {
 
         private void checkAccessibleTypes(final DiagnosticPosition pos, final Env<AttrContext> env,
                 final InferenceContext inferenceContext, final Type... ts) {
-            checkAccessibleTypes(pos, env, inferenceContext, List.from(ts));
+            checkAccessibleTypes(pos, env, inferenceContext, JCList.from(ts));
         }
 
         private void checkAccessibleTypes(final DiagnosticPosition pos, final Env<AttrContext> env,

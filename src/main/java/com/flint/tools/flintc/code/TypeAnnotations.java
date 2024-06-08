@@ -1086,14 +1086,14 @@ public class TypeAnnotations {
 
         private int methodParamIndex(JCList<JCTree> path, JCTree param) {
             JCList<JCTree> curr = path;
-            while (curr.head.getTag() != Tag.METHODDEF &&
-                    curr.head.getTag() != Tag.LAMBDA) {
+            while (curr.head.getTag() != JCTreeTag.METHODDEF &&
+                    curr.head.getTag() != JCTreeTag.LAMBDA) {
                 curr = curr.tail;
             }
-            if (curr.head.getTag() == Tag.METHODDEF) {
+            if (curr.head.getTag() == JCTreeTag.METHODDEF) {
                 JCMethodDecl method = (JCMethodDecl)curr.head;
                 return method.params.indexOf(param);
-            } else if (curr.head.getTag() == Tag.LAMBDA) {
+            } else if (curr.head.getTag() == JCTreeTag.LAMBDA) {
                 JCLambda lambda = (JCLambda)curr.head;
                 return lambda.params.indexOf(param);
             } else {
