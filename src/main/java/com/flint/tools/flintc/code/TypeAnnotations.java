@@ -822,7 +822,7 @@ public class TypeAnnotations {
 
                         Type typeToUse;
                         if (newPath.tail != null &&
-                            newPath.tail.head.hasTag(Tag.NEWCLASS)) {
+                            newPath.tail.head.hasTag(JCTreeTag.NEWCLASS)) {
                             // If we are within an anonymous class
                             // instantiation, use its type, because it
                             // contains a correctly nested type.

@@ -43,6 +43,7 @@ import com.flint.tools.flintc.tree.JCTree.JCMemberReference.ReferenceKind;
 import com.flint.tools.flintc.util.*;
 import com.flint.tools.flintc.util.JCDiagnostic.DiagnosticPosition;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.flint.tools.flintc.code.Flags.*;

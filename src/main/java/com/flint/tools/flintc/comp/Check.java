@@ -568,7 +568,7 @@ public class Check {
     Type checkType(final DiagnosticPosition pos, final Type found, final Type req, final CheckContext checkContext) {
         final InferenceContext inferenceContext = checkContext.inferenceContext();
         if (inferenceContext.free(req) || inferenceContext.free(found)) {
-            inferenceContext.addFreeTypeJCListener(JCList.of(req, found),
+            inferenceContext.addFreeTypeListener(JCList.of(req, found),
                     solvedContext -> checkType(pos, solvedContext.asInstType(found), solvedContext.asInstType(req), checkContext));
         }
         if (req.hasTag(ERROR))
