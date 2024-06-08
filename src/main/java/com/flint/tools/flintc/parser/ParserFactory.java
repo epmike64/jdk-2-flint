@@ -36,11 +36,6 @@ import java.util.Locale;
 
 /**
  * A factory for creating parsers.
- *
- * <p><b>This is NOT part of any supported API.
- * If you write code that depends on this, you do so at your own risk.
- * This code and its internal interfaces are subject to change or
- * deletion without notice.</b>
  */
 public class ParserFactory {
 
@@ -62,7 +57,7 @@ public class ParserFactory {
 //    final Source source;
     final Names names;
     final Options options;
-    final com.flint.tools.flintc.parser.ScannerFactory scannerFactory;
+    final ScannerFactory scannerFactory;
     final Locale locale;
 
     protected ParserFactory(Context context) {
@@ -79,11 +74,11 @@ public class ParserFactory {
         this.locale = context.get(Locale.class);
     }
 
-    public com.flint.tools.flintc.parser.JavacParser newParser(CharSequence input, boolean keepDocComments, boolean keepEndPos, boolean keepLineMap) {
+    public JavacParser newParser(CharSequence input, boolean keepDocComments, boolean keepEndPos, boolean keepLineMap) {
         return newParser(input, keepDocComments, keepEndPos, keepLineMap, false);
     }
 
-    public com.flint.tools.flintc.parser.JavacParser newParser(CharSequence input, boolean keepDocComments, boolean keepEndPos, boolean keepLineMap, boolean parseModuleInfo) {
+    public JavacParser newParser(CharSequence input, boolean keepDocComments, boolean keepEndPos, boolean keepLineMap, boolean parseModuleInfo) {
         Lexer lexer = scannerFactory.newScanner(input);
         return new JavacParser(this, lexer, keepDocComments, keepLineMap, keepEndPos, parseModuleInfo);
     }

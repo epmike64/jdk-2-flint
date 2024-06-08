@@ -25,7 +25,7 @@
 
 package com.flint.tools.flintc.parser;
 
-import com.flint.tools.flintc.parser.Token;
+
 import com.flint.tools.flintc.util.Position.LineMap;
 
 /**
