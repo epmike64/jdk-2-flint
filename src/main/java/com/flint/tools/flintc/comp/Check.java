@@ -949,7 +949,7 @@ public class Check {
         // System.out.println("method : " + owntype);
         // System.out.println("actuals: " + argtypes);
         if (inferenceContext.free(mtype)) {
-            inferenceContext.addFreeTypeJCListener(JCList.of(mtype),
+            inferenceContext.addFreeTypeListener(JCList.of(mtype),
                     solvedContext -> checkMethod(solvedContext.asInstType(mtype), sym, env, argtrees, argtypes, useVarargs, solvedContext));
             return mtype;
         }
