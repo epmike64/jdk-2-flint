@@ -48,7 +48,7 @@ public class TokenizerTester {
 		TokenizerTester tokenizerTester = new TokenizerTester(lexer);
 		tokenizerTester.nextToken();
 		while(tokenizerTester.token != null) {
-			System.out.println("TokenKind: " + tokenizerTester.token.kind);
+			System.out.println("TokenKind: " + tokenizerTester.token.kind + " " + tokenizerTester.token.kind.name());
 			tokenizerTester.nextToken();
 		}
 	}
