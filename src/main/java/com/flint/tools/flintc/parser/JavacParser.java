@@ -81,7 +81,7 @@ public class JavacParser implements Parser {
 
     /** The log to be used for error diagnostics.
      */
-//    private Log log;
+    private Log log;
 
     /** The Source language setting. */
 //    private Source source;
@@ -157,7 +157,7 @@ public class JavacParser implements Parser {
         this.S = S;
         nextToken(); // prime the pump
         this.F = fac.F;
-//        this.log = fac.log;
+        this.log = fac.log;
         this.names = fac.names;
 //        this.source = fac.source;
         this.allowTWR = true; //source.allowTryWithResources();
@@ -3011,7 +3011,7 @@ public class JavacParser implements Parser {
         int pos = token.pos;
         Name name;
         if (lambdaParameter && token.kind == UNDERSCORE) {
-            //log.error(pos, "underscore.as.identifier.in.lambda");
+            log.error(pos, "underscore.as.identifier.in.lambda");
             name = token.name();
             nextToken();
         } else {
@@ -3021,7 +3021,7 @@ public class JavacParser implements Parser {
                     name = ((JCIdent)pn).name;
                 } else {
                     if ((mods.flags & Flags.VARARGS) != 0) {
-                        //log.error(token.pos, "varargs.and.receiver");
+                        log.error(token.pos, "varargs.and.receiver");
                     }
                     if (token.kind == LBRACKET) {
                         //log.error(token.pos, "array.and.receiver");
