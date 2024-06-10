@@ -80,6 +80,7 @@ import com.flint.tools.flintc.util.JDK9Wrappers.Configuration;
 import com.flint.tools.flintc.util.JDK9Wrappers.Layer;
 import com.flint.tools.flintc.util.JDK9Wrappers.ModuleFinder;
 import com.flint.tools.flintc.util.JDK9Wrappers.ServiceLoaderHelper;
+import com.flint.tools.flintc.util.JDK9Wrappers;
 
 import static java.nio.file.FileVisitOption.FOLLOW_LINKS;
 
@@ -974,7 +975,7 @@ public class JavacFileManager extends BaseFileManager implements StandardJavaFil
     public <S> ServiceLoader<S> getServiceLoader(Location location, Class<S> service) throws IOException {
         nullCheck(location);
         nullCheck(service);
-        Module.getModule(getClass()).addUses(service);
+        com.flint.tools.flintc.util.JDK9Wrappers.Module.getModule(getClass()).addUses(service);
         if (location.isModuleOrientedLocation()) {
             Collection<Path> paths = locations.getLocation(location);
             ModuleFinder finder = ModuleFinder.of(paths.toArray(new Path[paths.size()]));

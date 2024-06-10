@@ -25,13 +25,17 @@
 
 package com.flint.tools.flintc.util;
 
-import com.flint.tools.flintc.code.Lint.LintCategory;
-import com.flint.tools.flintc.util.JCDiagnostic.*;
-
-import javax.tools.JavaFileObject;
 import java.util.HashMap;
 import java.util.Map;
-import java.lang.Error;
+import javax.tools.JavaFileObject;
+
+import com.flint.tools.flintc.code.Lint.LintCategory;
+import com.flint.tools.flintc.util.JCDiagnostic.DiagnosticFlag;
+import com.flint.tools.flintc.util.JCDiagnostic.Error;
+import com.flint.tools.flintc.util.JCDiagnostic.Note;
+import com.flint.tools.flintc.util.JCDiagnostic.Warning;
+import com.flint.tools.flintc.util.JCDiagnostic.DiagnosticPosition;
+import com.flint.tools.flintc.util.JCDiagnostic.SimpleDiagnosticPosition;
 
 
 /**
@@ -46,17 +50,17 @@ import java.lang.Error;
 public abstract class AbstractLog {
     /** Factory for diagnostics
      */
-    protected com.flint.tools.flintc.util.JCDiagnostic.Factory diags;
+    protected JCDiagnostic.Factory diags;
 
     /** The file that's currently being translated.
      */
-    protected com.flint.tools.flintc.util.DiagnosticSource source;
+    protected DiagnosticSource source;
 
     /** A cache of lightweight DiagnosticSource objects.
      */
-    protected Map<JavaFileObject, com.flint.tools.flintc.util.DiagnosticSource> sourceMap;
+    protected Map<JavaFileObject, DiagnosticSource> sourceMap;
 
-    AbstractLog(com.flint.tools.flintc.util.JCDiagnostic.Factory diags) {
+    AbstractLog(JCDiagnostic.Factory diags) {
         this.diags = diags;
         sourceMap = new HashMap<>();
     }
@@ -69,12 +73,12 @@ public abstract class AbstractLog {
         return prev;
     }
 
-    protected com.flint.tools.flintc.util.DiagnosticSource getSource(JavaFileObject file) {
+    protected DiagnosticSource getSource(JavaFileObject file) {
         if (file == null)
-            return com.flint.tools.flintc.util.DiagnosticSource.NO_SOURCE;
-        com.flint.tools.flintc.util.DiagnosticSource s = sourceMap.get(file);
+            return DiagnosticSource.NO_SOURCE;
+        DiagnosticSource s = sourceMap.get(file);
         if (s == null) {
-            s = new com.flint.tools.flintc.util.DiagnosticSource(file, this);
+            s = new DiagnosticSource(file, this);
             sourceMap.put(file, s);
         }
         return s;

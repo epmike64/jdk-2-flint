@@ -104,7 +104,7 @@ public class Position {
         return (line << LINESHIFT) + col;
     }
 
-    public static interface LineMap extends com.sun.source.tree.LineMap {
+    public static interface LineMap extends com.flint.source.tree.LineMap {
         /** Find the start position of a line.
          *
          * @param line number of line (first is 1)

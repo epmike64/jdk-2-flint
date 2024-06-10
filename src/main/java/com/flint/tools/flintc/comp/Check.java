@@ -811,8 +811,8 @@ public class Check {
             return checkClassType(tree.clazz.pos(), t, true);
         } else {
             if (tree.def != null && !allowDiamondWithAnonymousClassCreation) {
-                log.error(DiagnosticFlag.SOURCE_LEVEL, tree.clazz.pos(),
-                        Errors.CantApplyDiamond1(t, Fragments.DiamondAndAnonClassNotSupportedInSource(source.name)));
+//                log.error(DiagnosticFlag.SOURCE_LEVEL, tree.clazz.pos(),
+//                        Errors.CantApplyDiamond1(t, Fragments.DiamondAndAnonClassNotSupportedInSource(source.name)));
             }
             if (t.tsym.type.getTypeArguments().isEmpty()) {
                 log.error(tree.clazz.pos(),
@@ -1740,9 +1740,9 @@ public class Check {
             types.returnTypeSubstitutable(mt, ot, otres, overrideWarner);
         if (!resultTypesOK) {
             if ((m.flags() & STATIC) != 0 && (other.flags() & STATIC) != 0) {
-                log.error(TreeInfo.diagnosticPositionFor(m, tree),
-                        Errors.OverrideIncompatibleRet(Fragments.CantHide(m, m.location(), other,
-                                        other.location()), mtres, otres));
+//                log.error(TreeInfo.diagnosticPositionFor(m, tree),
+//                        Errors.OverrideIncompatibleRet(Fragments.CantHide(m, m.location(), other,
+//                                        other.location()), mtres, otres));
                 m.flags_field |= BAD_OVERRIDE;
             } else {
                 log.error(TreeInfo.diagnosticPositionFor(m, tree),
@@ -2046,9 +2046,9 @@ public class Check {
                     break;
                 }
             }
-            log.error(pos,
-                      explicitOverride ? Errors.MethodDoesNotOverrideSuperclass :
-                                Errors.AnonymousDiamondMethodDoesNotOverrideSuperclass(Fragments.DiamondAnonymousMethodsImplicitlyOverride));
+//            log.error(pos,
+//                      explicitOverride ? Errors.MethodDoesNotOverrideSuperclass :
+//                                Errors.AnonymousDiamondMethodDoesNotOverrideSuperclass(Fragments.DiamondAnonymousMethodsImplicitlyOverride));
         }
     }
 

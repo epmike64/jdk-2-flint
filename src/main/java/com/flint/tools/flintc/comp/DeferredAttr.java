@@ -36,8 +36,8 @@ import com.flint.tools.flintc.tree.TreeCopier;
 import com.flint.tools.flintc.tree.TreeInfo;
 import com.flint.tools.flintc.tree.TreeMaker;
 import com.flint.tools.flintc.tree.TreeScanner;
-import com.sun.source.tree.LambdaExpressionTree.BodyKind;
-import com.sun.source.tree.NewClassTree;
+import com.flint.source.tree.LambdaExpressionTree.BodyKind;
+import com.flint.source.tree.NewClassTree;
 import com.flint.tools.flintc.code.Type.StructuralTypeMapping;
 import com.flint.tools.flintc.code.Types.TypeMapping;
 import com.flint.tools.flintc.comp.ArgumentAttr.LocalCacheContext;
@@ -65,7 +65,7 @@ import java.util.Set;
 import java.util.WeakHashMap;
 import java.util.function.Function;
 
-import com.sun.source.tree.MemberReferenceTree;
+import com.flint.source.tree.MemberReferenceTree;
 
 import static com.flint.tools.flintc.code.TypeTag.*;
 import static com.flint.tools.flintc.tree.JCTree.JCTreeTag.*;

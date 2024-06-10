@@ -25,7 +25,7 @@
 
 package com.flint.tools.flintc.parser;
 
-import com.sun.source.doctree.AttributeTree.ValueKind;
+import com.flint.source.doctree.AttributeTree.ValueKind;
 import com.flint.tools.flintc.parser.DocCommentParser.TagParser.Kind;
 import com.flint.tools.flintc.parser.Tokens.Comment;
 import com.flint.tools.flintc.tree.DCTree;
@@ -475,7 +475,7 @@ public class DocCommentParser {
     JCTree parseType(String s) throws ParseException {
         com.flint.tools.flintc.parser.JavacParser p = fac.newParser(s, false, false, false);
         JCTree tree = p.parseType();
-        if (p.token().kind != Tokens.TokenKind.EOF)
+        if (p.token().kind != TokenKind.EOF)
             throw new ParseException("dc.ref.unexpected.input");
         return tree;
     }
@@ -483,7 +483,7 @@ public class DocCommentParser {
     Name parseMember(String s) throws ParseException {
         com.flint.tools.flintc.parser.JavacParser p = fac.newParser(s, false, false, false);
         Name name = p.ident();
-        if (p.token().kind != Tokens.TokenKind.EOF)
+        if (p.token().kind != TokenKind.EOF)
             throw new ParseException("dc.ref.unexpected.input");
         return name;
     }
@@ -496,18 +496,18 @@ public class DocCommentParser {
         ListBuffer<JCTree> paramTypes = new ListBuffer<>();
         paramTypes.add(p.parseType());
 
-        if (p.token().kind == Tokens.TokenKind.IDENTIFIER)
+        if (p.token().kind == TokenKind.IDENTIFIER)
             p.nextToken();
 
-        while (p.token().kind == Tokens.TokenKind.COMMA) {
+        while (p.token().kind == TokenKind.COMMA) {
             p.nextToken();
             paramTypes.add(p.parseType());
 
-            if (p.token().kind == Tokens.TokenKind.IDENTIFIER)
+            if (p.token().kind == TokenKind.IDENTIFIER)
                 p.nextToken();
         }
 
-        if (p.token().kind != Tokens.TokenKind.EOF)
+        if (p.token().kind != TokenKind.EOF)
             throw new ParseException("dc.ref.unexpected.input");
 
         return paramTypes.toList();

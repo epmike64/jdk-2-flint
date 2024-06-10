@@ -54,7 +54,7 @@ import com.flint.tools.flintc.processing.PrintingProcessor;
 import com.flint.tools.flintc.tree.JCTree;
 import com.flint.tools.flintc.tree.TreeInfo;
 import com.flint.tools.flintc.tree.TreeScanner;
-import com.sun.source.util.JavacTask;
+import com.flint.source.util.JavacTask;
 import com.flint.tools.flintc.code.Attribute.Compound;
 import com.flint.tools.flintc.code.Directive.ExportsDirective;
 import com.flint.tools.flintc.code.Directive.ExportsFlag;

@@ -62,18 +62,18 @@ import com.flint.tools.flintc.model.JavacElements;
 import com.flint.tools.flintc.parser.Tokens;
 import com.flint.tools.flintc.processing.JavacProcessingEnvironment;
 import com.flint.tools.flintc.tree.*;
-import com.sun.source.doctree.DocCommentTree;
-import com.sun.source.doctree.DocTree;
-import com.sun.source.tree.CatchTree;
-import com.sun.source.tree.CompilationUnitTree;
-import com.sun.source.tree.Scope;
-import com.sun.source.tree.Tree;
-import com.sun.source.util.DocSourcePositions;
-import com.sun.source.util.DocTreePath;
-import com.sun.source.util.DocTreeScanner;
-import com.sun.source.util.DocTrees;
-import com.sun.source.util.JavacTask;
-import com.sun.source.util.TreePath;
+import com.flint.source.doctree.DocCommentTree;
+import com.flint.source.doctree.DocTree;
+import com.flint.source.tree.CatchTree;
+import com.flint.source.tree.CompilationUnitTree;
+import com.flint.source.tree.Scope;
+import com.flint.source.tree.Tree;
+import com.flint.source.util.DocSourcePositions;
+import com.flint.source.util.DocTreePath;
+import com.flint.source.util.DocTreeScanner;
+import com.flint.source.util.DocTrees;
+import com.flint.source.util.JavacTask;
+import com.flint.source.util.TreePath;
 import com.flint.tools.flintc.code.Scope.NamedImportScope;
 import com.flint.tools.flintc.code.Scope.StarImportScope;
 import com.flint.tools.flintc.code.Scope.WriteableScope;
@@ -449,12 +449,12 @@ public class JavacTrees extends DocTrees {
         return null;
     }
 
-    /** @see com.sun.tools.javadoc.ClassDocImpl#findField */
+    /** @see com.flint.tools.javadoc.ClassDocImpl#findField */
     private VarSymbol findField(ClassSymbol tsym, Name fieldName) {
         return searchField(tsym, fieldName, new HashSet<>());
     }
 
-    /** @see com.sun.tools.javadoc.ClassDocImpl#searchField */
+    /** @see com.flint.tools.javadoc.ClassDocImpl#searchField */
     private VarSymbol searchField(ClassSymbol tsym, Name fieldName, Set<ClassSymbol> searched) {
         if (searched.contains(tsym)) {
             return null;
@@ -501,7 +501,7 @@ public class JavacTrees extends DocTrees {
         return null;
     }
 
-    /** @see com.sun.tools.javadoc.ClassDocImpl#findConstructor */
+    /** @see com.flint.tools.javadoc.ClassDocImpl#findConstructor */
     MethodSymbol findConstructor(ClassSymbol tsym, JCList<Type> paramTypes) {
         for (Symbol sym : tsym.members().getSymbolsByName(names.init)) {
             if (sym.kind == MTH) {
@@ -513,12 +513,12 @@ public class JavacTrees extends DocTrees {
         return null;
     }
 
-    /** @see com.sun.tools.javadoc.ClassDocImpl#findMethod */
+    /** @see com.flint.tools.javadoc.ClassDocImpl#findMethod */
     private MethodSymbol findMethod(ClassSymbol tsym, Name methodName, JCList<Type> paramTypes) {
         return searchMethod(tsym, methodName, paramTypes, new HashSet<>());
     }
 
-    /** @see com.sun.tools.javadoc.ClassDocImpl#searchMethod */
+    /** @see com.flint.tools.javadoc.ClassDocImpl#searchMethod */
     private MethodSymbol searchMethod(ClassSymbol tsym, Name methodName,
                                       JCList<Type> paramTypes, Set<ClassSymbol> searched) {
         //### Note that this search is not necessarily what the compiler would do!
@@ -600,7 +600,7 @@ public class JavacTrees extends DocTrees {
         return null;
     }
 
-    /** @see com.sun.tools.javadoc.ClassDocImpl */
+    /** @see com.flint.tools.javadoc.ClassDocImpl */
     private boolean hasParameterTypes(MethodSymbol method, JCList<Type> paramTypes) {
         if (paramTypes == null)
             return true;

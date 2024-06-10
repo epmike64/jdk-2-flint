@@ -41,7 +41,7 @@ import com.flint.tools.flintc.code.Symbol;
 import com.flint.tools.flintc.code.Type;
 import com.flint.tools.flintc.code.TypeTag;
 import com.flint.tools.flintc.code.Types;
-import com.sun.source.tree.*;
+import com.flint.source.tree.*;
 import com.flint.tools.flintc.code.Directive.RequiresDirective;
 import com.flint.tools.flintc.code.Scope.*;
 import com.flint.tools.flintc.code.Symbol.*;
@@ -53,12 +53,12 @@ import static com.flint.tools.flintc.tree.JCTree.JCTreeTag.*;
 
 import javax.tools.JavaFileManager.Location;
 
-import com.sun.source.tree.ModuleTree.ModuleKind;
+import com.flint.source.tree.ModuleTree.ModuleKind;
 import com.flint.tools.flintc.code.Directive.ExportsDirective;
 import com.flint.tools.flintc.code.Directive.OpensDirective;
 import com.flint.tools.flintc.code.Type.ModuleType;
 import com.flint.tools.flintc.util.JCList;
-import com.flint.source.tree.DocCommentTable;
+import com.flint.tools.flintc.tree.DocCommentTable;
 
 /**
  * Root class for abstract syntax tree nodes. It provides definitions
@@ -73,14 +73,14 @@ import com.flint.source.tree.DocCommentTable;
  * No other fields are kept in a tree node; instead parameters are
  * passed to methods accessing the node.
  *
- * <p>Except for the methods defined by com.sun.source, the only
+ * <p>Except for the methods defined by com.flint.source, the only
  * method defined in subclasses is `visit' which applies a given
  * visitor to the tree. The actual tree processing is done by visitor
  * classes in other packages. The abstract class Visitor, as well as
  * an Factory interface for trees, are defined as inner classes in
  * Tree.
  *
- * <p>To avoid ambiguities with the Tree API in com.sun.source all sub
+ * <p>To avoid ambiguities with the Tree API in com.flint.source all sub
  * classes should, by convention, start with JC (javac).
  *
  * <p><b>This is NOT part of any supported API.
@@ -526,7 +526,7 @@ public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
         public Position.LineMap lineMap = null;
         /** A table that stores all documentation comments indexed by the tree
          * nodes they refer to. defined only if option -s is set. */
-        public DocCommentTable docComments = null;
+        public com.flint.tools.flintc.tree.DocCommentTable docComments = null;
         /* An object encapsulating ending positions of source ranges indexed by
          * the tree nodes they belong to. Defined only if option -Xjcov is set. */
         public EndPosTable endPositions = null;

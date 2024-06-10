@@ -25,8 +25,8 @@
 
 package com.flint.tools.flintc.tree;
 
-import com.sun.source.tree.*;
-import com.sun.source.tree.Tree.Kind;
+import com.flint.source.tree.*;
+import com.flint.source.tree.Tree.Kind;
 import com.flint.tools.flintc.tree.JCTree.*;
 import com.flint.tools.flintc.util.DefinedBy;
 import com.flint.tools.flintc.util.DefinedBy.Api;

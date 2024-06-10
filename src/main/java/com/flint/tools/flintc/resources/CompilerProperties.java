@@ -19,6 +19,7 @@ import javax.tools.JavaFileObject;
 import com.flint.tools.flintc.util.JCDiagnostic.Warning;
 import com.flint.tools.flintc.util.JCDiagnostic.Note;
 import com.flint.tools.flintc.util.JCDiagnostic.Fragment;
+import com.flint.tools.flintc.util.JCDiagnostic.Error;
 
 public class CompilerProperties {
     public static class Errors {

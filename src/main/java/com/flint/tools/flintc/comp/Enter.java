@@ -321,7 +321,7 @@ public class Enter extends JCTree.Visitor {
         if (TreeInfo.isModuleInfo(tree)) {
             JCPackageDecl pd = tree.getPackage();
             if (pd != null) {
-                log.error(pd.pos(), Errors.NoPkgInModuleInfoJava);
+                //log.error(pd.pos(), Errors.NoPkgInModuleInfoJava);
             }
             tree.packge = syms.rootPackage;
             Env<AttrContext> topEnv = topLevelEnv(tree);
@@ -353,9 +353,9 @@ public class Enter extends JCTree.Visitor {
                     .filter(cand -> visiblePackages.get(tree.packge.fullname) == syms.getPackage(cand, tree.packge.fullname))
                     .findAny();
 
-            if (dependencyWithPackage.isPresent()) {
-                log.error(pd, Errors.PackageInOtherModule(dependencyWithPackage.get()));
-            }
+//            if (dependencyWithPackage.isPresent()) {
+//                log.error(pd, Errors.PackageInOtherModule(dependencyWithPackage.get()));
+//            }
 
             tree.packge.complete(); // Find all classes in package.
 

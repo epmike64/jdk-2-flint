@@ -64,7 +64,7 @@ public abstract class JavacTask implements CompilationTask {
             throw new IllegalArgumentException();
         Context c = ((JavacProcessingEnvironment) processingEnvironment).getContext();
         JavacTask t = c.get(JavacTask.class);
-        return (t != null) ? t : new BasicJavacTask(c, true);
+        return null;//(t != null) ? t : new BasicJavacTask(c, true);
     }
 
     /**

@@ -51,11 +51,11 @@ import com.flint.tools.flintc.tree.TreeInfo;
 import com.flint.tools.flintc.tree.TreeMaker;
 import com.flint.tools.flintc.tree.TreeScanner;
 import com.flint.tools.flintc.tree.TreeTranslator;
-import com.sun.source.tree.IdentifierTree;
-import com.sun.source.tree.MemberReferenceTree.ReferenceMode;
-import com.sun.source.tree.MemberSelectTree;
-import com.sun.source.tree.TreeVisitor;
-import com.sun.source.util.SimpleTreeVisitor;
+import com.flint.source.tree.IdentifierTree;
+import com.flint.source.tree.MemberReferenceTree.ReferenceMode;
+import com.flint.source.tree.MemberSelectTree;
+import com.flint.source.tree.TreeVisitor;
+import com.flint.source.util.SimpleTreeVisitor;
 import com.flint.tools.flintc.code.Lint.LintCategory;
 import com.flint.tools.flintc.code.Scope.WriteableScope;
 import com.flint.tools.flintc.code.Symbol.*;
@@ -300,7 +300,7 @@ public class Attr extends JCTree.Visitor {
      */
     void checkAssignable(DiagnosticPosition pos, VarSymbol v, JCTree base, Env<AttrContext> env) {
         if (v.name == names._this) {
-            log.error(pos, Errors.CantAssignValToThis);
+            //log.error(pos, Errors.CantAssignValToThis);
         } else if ((v.flags() & FINAL) != 0 &&
             ((v.flags() & HASINIT) != 0
              ||
@@ -2286,12 +2286,12 @@ public class Attr extends JCTree.Visitor {
                     if (!clazztype.isErroneous() && invalidDiamondArgs.nonEmpty()) {
                         // One or more types inferred in the previous steps is non-denotable.
                         Fragment fragment = Diamond(clazztype.tsym);
-                        log.error(tree.clazz.pos(),
-                                Errors.CantApplyDiamond1(
-                                        fragment,
-                                        invalidDiamondArgs.size() > 1 ?
-                                                DiamondInvalidArgs(invalidDiamondArgs, fragment) :
-                                                DiamondInvalidArg(invalidDiamondArgs, fragment)));
+//                        log.error(tree.clazz.pos(),
+//                                Errors.CantApplyDiamond1(
+//                                        fragment,
+//                                        invalidDiamondArgs.size() > 1 ?
+//                                                DiamondInvalidArgs(invalidDiamondArgs, fragment) :
+//                                                DiamondInvalidArg(invalidDiamondArgs, fragment)));
                     }
                     // For <>(){}, inferred types must also be accessible.
                     for (Type t : clazztype.getTypeArguments()) {
@@ -4906,7 +4906,7 @@ public class Attr extends JCTree.Visitor {
             for (JCAnnotation ai : annotations) {
                 if (!ai.type.isErroneous() &&
                         typeAnnotations.annotationTargetType(ai.attribute, sym) == TypeAnnotations.AnnotationType.DECLARATION) {
-                    log.error(ai.pos(), Errors.AnnotationTypeNotApplicableToType(ai.type));
+                 //   log.error(ai.pos(), Errors.AnnotationTypeNotApplicableToType(ai.type));
                 }
             }
         }

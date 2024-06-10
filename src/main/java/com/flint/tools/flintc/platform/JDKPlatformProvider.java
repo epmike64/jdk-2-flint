@@ -48,7 +48,7 @@ import java.util.stream.Stream;
 import javax.annotation.processing.Processor;
 
 import com.flint.tools.flintc.jvm.Target;
-import com.sun.source.util.Plugin;
+import com.flint.source.util.Plugin;
 
 /** PlatformProvider for JDK N.
  *

@@ -59,7 +59,7 @@ import com.flint.tools.flintc.jvm.Profile;
 import com.flint.tools.flintc.jvm.Target;
 import com.flint.tools.flintc.platform.PlatformDescription;
 import com.flint.tools.flintc.platform.PlatformUtils;
-//import com.sun.tools.doclint.DocLint;
+import com.flint.tools.doclint.DocLint;
 import com.flint.tools.flintc.code.Lint.LintCategory;
 import com.flint.tools.flintc.main.OptionHelper.GrumpyHelper;
 import com.flint.tools.flintc.resources.CompilerProperties.Errors;
@@ -430,9 +430,9 @@ public class Arguments {
         JavaFileManager fm = getFileManager();
         if (options.isSet(Option.MODULE)) {
             if (!fm.hasLocation(StandardLocation.CLASS_OUTPUT)) {
-                log.error(Errors.OutputDirMustBeSpecifiedWithDashMOption);
+              //  log.error(Errors.OutputDirMustBeSpecifiedWithDashMOption);
             } else if (!fm.hasLocation(StandardLocation.MODULE_SOURCE_PATH)) {
-                log.error(Errors.ModulesourcepathMustBeSpecifiedWithDashMOption);
+                //log.error(Errors.ModulesourcepathMustBeSpecifiedWithDashMOption);
             } else {
                 java.util.List<String> modules = Arrays.asList(options.get(Option.MODULE).split(","));
                 try {
@@ -592,7 +592,7 @@ public class Arguments {
         }
 
         if (target.compareTo(Target.MIN) < 0) {
-            log.error(Errors.OptionRemovedTarget(target.name, Target.MIN.name));
+            //log.error(Errors.OptionRemovedTarget(target.name, Target.MIN.name));
         } else if (target == Target.MIN && lintOptions) {
             log.warning(LintCategory.OPTIONS, Warnings.OptionObsoleteTarget(target.name));
             obsoleteOptionFound = true;
@@ -624,7 +624,7 @@ public class Arguments {
 
         if (fm.hasLocation(StandardLocation.ANNOTATION_PROCESSOR_MODULE_PATH) &&
             fm.hasLocation(StandardLocation.ANNOTATION_PROCESSOR_PATH)) {
-            log.error(Errors.ProcessorpathNoProcessormodulepath);
+            //log.error(Errors.ProcessorpathNoProcessormodulepath);
         }
 
         if (obsoleteOptionFound && lintOptions) {
@@ -779,8 +779,8 @@ public class Arguments {
         if (moduleName != null) {
             if (!SourceVersion.isName(moduleName, sv)) {
                 // syntactically invalid module name:  e.g. --default-module-for-created-files m!
-                log.error(Errors.BadNameForOption(Option.DEFAULT_MODULE_FOR_CREATED_FILES,
-                                                  moduleName));
+//                log.error(Errors.BadNameForOption(Option.DEFAULT_MODULE_FOR_CREATED_FILES,
+//                                                  moduleName));
             }
         }
     }

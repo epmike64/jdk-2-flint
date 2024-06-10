@@ -25,8 +25,8 @@
 
 package com.flint.tools.flintc.parser;
 
-import com.sun.source.tree.MemberReferenceTree.ReferenceMode;
-import com.sun.source.tree.ModuleTree.ModuleKind;
+import com.flint.source.tree.MemberReferenceTree.ReferenceMode;
+import com.flint.source.tree.ModuleTree.ModuleKind;
 import com.flint.tools.flintc.code.BoundKind;
 import com.flint.tools.flintc.code.Flags;
 import com.flint.tools.flintc.code.TypeTag;

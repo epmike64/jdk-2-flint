@@ -46,7 +46,7 @@ import com.flint.tools.flintc.file.JavacFileManager;
 import com.flint.tools.flintc.jvm.Target;
 import com.flint.tools.flintc.main.Arguments;
 import com.flint.tools.flintc.main.Option;
-import com.sun.source.util.JavacTask;
+import com.flint.source.util.JavacTask;
 import com.flint.tools.flintc.util.ClientCodeException;
 import com.flint.tools.flintc.util.Context;
 import com.flint.tools.flintc.util.DefinedBy;

@@ -25,7 +25,7 @@
 
 package com.flint.tools.flintc.code;
 
-import com.sun.source.tree.Tree.Kind;
+import com.flint.source.tree.Tree.Kind;
 
 import javax.lang.model.type.TypeKind;
 

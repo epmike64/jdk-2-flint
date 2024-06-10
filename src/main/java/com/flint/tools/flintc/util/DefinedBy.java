@@ -44,7 +44,7 @@ public @interface DefinedBy {
     public enum Api {
         ANNOTATION_PROCESSING("javax.annotation.processing"),
         COMPILER("javax.tools"),
-        COMPILER_TREE("com.sun.source"),
+        COMPILER_TREE("com.flint.source"),
         LANGUAGE_MODEL("javax.lang.model");
 
         /**The package under which all interfaces/classes of this API belong.

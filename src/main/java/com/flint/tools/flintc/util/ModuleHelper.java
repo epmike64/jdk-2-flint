@@ -25,6 +25,8 @@
 
 package com.flint.tools.flintc.util;
 
+import com.flint.tools.flintc.util.JDK9Wrappers;
+
 public class ModuleHelper {
 
     private static final String[] javacInternalPackages = new String[] {
@@ -41,10 +43,10 @@ public class ModuleHelper {
             "com.flint.tools.flintc.tree",
             "com.flint.tools.flintc.util",
 
-            "com.sun.tools.doclint",
+            "com.flint.tools.doclint",
     };
 
-    public static void addExports(Module from, Module to) {
+    public static void addExports(JDK9Wrappers.Module  from, JDK9Wrappers.Module  to) {
         for (String pack: javacInternalPackages) {
             from.addExports(pack, to);
         }

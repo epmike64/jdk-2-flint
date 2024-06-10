@@ -29,8 +29,8 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
 
-import com.sun.source.doctree.*;
-import com.sun.source.doctree.AttributeTree.ValueKind;
+import com.flint.source.doctree.*;
+import com.flint.source.doctree.AttributeTree.ValueKind;
 import com.flint.tools.flintc.util.Convert;
 import com.flint.tools.flintc.util.DefinedBy;
 import com.flint.tools.flintc.util.DefinedBy.Api;

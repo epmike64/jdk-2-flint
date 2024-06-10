@@ -210,7 +210,7 @@ public class ClassFinder {
         if (fm instanceof JavacFileManager) {
             JavacFileManager jfm = (JavacFileManager) fm;
             useCtProps = jfm.isDefaultBootClassPath() && jfm.isSymbolFileEnabled();
-        } else if (fm.getClass().getName().equals("com.sun.tools.sjavac.comp.SmartFileManager")) {
+        } else if (fm.getClass().getName().equals("com.flint.tools.sjavac.comp.SmartFileManager")) {
             useCtProps = !options.isSet("ignore.symbol.file");
         } else {
             useCtProps = false;

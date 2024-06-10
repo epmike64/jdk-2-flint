@@ -330,8 +330,8 @@ public class ModuleFinder {
                             results.add(msym);
                         }
                     } else {
-                        log.error(Errors.DuplicateModuleOnPath(
-                                getDescription(moduleLocationIterator.outer), n));
+//                        log.error(Errors.DuplicateModuleOnPath(
+//                                getDescription(moduleLocationIterator.outer), n));
                     }
                 } catch (IOException e) {
                     // skip location for now?  log error?

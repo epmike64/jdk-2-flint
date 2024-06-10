@@ -46,7 +46,7 @@ import com.flint.tools.flintc.comp.LambdaToMethod.LambdaAnalyzerPreprocessor.*;
 import com.flint.tools.flintc.comp.Lower.BasicFreeVarCollector;
 import com.flint.tools.flintc.util.*;
 import com.flint.tools.flintc.util.JCDiagnostic.DiagnosticPosition;
-import com.sun.source.tree.MemberReferenceTree.ReferenceMode;
+import com.flint.source.tree.MemberReferenceTree.ReferenceMode;
 
 import java.util.EnumMap;
 import java.util.HashMap;

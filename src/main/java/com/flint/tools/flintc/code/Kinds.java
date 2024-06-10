@@ -31,7 +31,7 @@ import java.util.Locale;
 
 import com.flint.tools.flintc.api.Formattable;
 import com.flint.tools.flintc.api.Messages;
-import com.sun.source.tree.MemberReferenceTree;
+import com.flint.source.tree.MemberReferenceTree;
 
 import static com.flint.tools.flintc.code.Flags.*;
 import static com.flint.tools.flintc.code.TypeTag.CLASS;

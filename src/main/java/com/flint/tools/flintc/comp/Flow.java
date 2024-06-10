@@ -39,7 +39,7 @@ import com.flint.tools.flintc.tree.JCTree;
 import com.flint.tools.flintc.tree.TreeInfo;
 import com.flint.tools.flintc.tree.TreeMaker;
 import com.flint.tools.flintc.tree.TreeScanner;
-import com.sun.source.tree.LambdaExpressionTree.BodyKind;
+import com.flint.source.tree.LambdaExpressionTree.BodyKind;
 import com.flint.tools.flintc.code.Scope.WriteableScope;
 import com.flint.tools.flintc.util.*;
 import com.flint.tools.flintc.util.JCDiagnostic.DiagnosticPosition;

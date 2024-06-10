@@ -34,7 +34,7 @@ import java.util.Map;
 
 import javax.annotation.processing.Processor;
 
-import com.sun.source.util.Plugin;
+import com.flint.source.util.Plugin;
 
 /**A description of settings needed for a particular {@code --release name} option.
  *

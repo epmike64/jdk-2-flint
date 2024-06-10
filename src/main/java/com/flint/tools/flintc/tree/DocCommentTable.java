@@ -1,6 +1,6 @@
 package com.flint.tools.flintc.tree;
 
-import com.sun.source.doctree.ErroneousTree;
+import com.flint.source.doctree.ErroneousTree;
 import com.flint.tools.flintc.parser.Tokens.Comment;
 import com.flint.tools.flintc.tree.DCTree.DCDocComment;
 import com.flint.tools.flintc.tree.JCTree;

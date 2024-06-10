@@ -32,7 +32,7 @@ import com.flint.tools.flintc.code.Type;
 import com.flint.tools.flintc.tree.JCTree;
 import com.flint.tools.flintc.tree.TreeCopier;
 import com.flint.tools.flintc.tree.TreeInfo;
-import com.sun.source.tree.LambdaExpressionTree.BodyKind;
+import com.flint.source.tree.LambdaExpressionTree.BodyKind;
 import com.flint.tools.flintc.code.Types.FunctionDescriptorLookupError;
 import com.flint.tools.flintc.comp.Attr.ResultInfo;
 import com.flint.tools.flintc.comp.Attr.TargetInfo;

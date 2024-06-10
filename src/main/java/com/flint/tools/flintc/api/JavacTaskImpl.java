@@ -47,7 +47,7 @@ import com.flint.tools.flintc.main.Main;
 import com.flint.tools.flintc.processing.AnnotationProcessingError;
 import com.flint.tools.flintc.tree.JCTree;
 import com.flint.tools.flintc.tree.TreeInfo;
-import com.sun.source.tree.*;
+import com.flint.source.tree.*;
 import com.flint.tools.flintc.code.Symbol.ClassSymbol;
 import com.flint.tools.flintc.parser.Parser;
 import com.flint.tools.flintc.parser.ParserFactory;

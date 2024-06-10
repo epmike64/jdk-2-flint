@@ -35,7 +35,7 @@ import com.flint.tools.flintc.code.Symtab;
 import com.flint.tools.flintc.code.Type;
 import com.flint.tools.flintc.code.TypeTag;
 import com.flint.tools.flintc.code.Types;
-import com.sun.source.tree.ModuleTree.ModuleKind;
+import com.flint.source.tree.ModuleTree.ModuleKind;
 import com.flint.tools.flintc.code.Symbol.*;
 import com.flint.tools.flintc.code.Type.*;
 import com.flint.tools.flintc.util.*;

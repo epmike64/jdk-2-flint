@@ -51,7 +51,7 @@ import static com.flint.tools.flintc.main.Option.*;
  */
 public class Log extends AbstractLog {
     /** The context key for the log. */
-    public static final com.flint.tools.flintc.util.Context.Key<Log> logKey = new com.flint.tools.flintc.util.Context.Key<>();
+    public static final Context.Key<Log> logKey = new Context.Key<>();
 
     /** The context key for the standard output PrintWriter. */
     public static final com.flint.tools.flintc.util.Context.Key<PrintWriter> outKey = new com.flint.tools.flintc.util.Context.Key<>();
@@ -112,7 +112,7 @@ public class Log extends AbstractLog {
         }
 
         @Override
-        public void report(com.flint.tools.flintc.util.JCDiagnostic diag) { }
+        public void report(JCDiagnostic diag) { }
     }
 
     /**
@@ -123,21 +123,21 @@ public class Log extends AbstractLog {
      * active diagnostic handler.
      */
     public static class DeferredDiagnosticHandler extends DiagnosticHandler {
-        private Queue<com.flint.tools.flintc.util.JCDiagnostic> deferred = new ListBuffer<>();
-        private final com.flint.tools.flintc.util.Filter<com.flint.tools.flintc.util.JCDiagnostic> filter;
+        private Queue<JCDiagnostic> deferred = new ListBuffer<>();
+        private final Filter<JCDiagnostic> filter;
 
         public DeferredDiagnosticHandler(Log log) {
             this(log, null);
         }
 
-        public DeferredDiagnosticHandler(Log log, Filter<com.flint.tools.flintc.util.JCDiagnostic> filter) {
+        public DeferredDiagnosticHandler(Log log, Filter<JCDiagnostic> filter) {
             this.filter = filter;
             install(log);
         }
 
         @Override
-        public void report(com.flint.tools.flintc.util.JCDiagnostic diag) {
-            if (!diag.isFlagSet(com.flint.tools.flintc.util.JCDiagnostic.DiagnosticFlag.NON_DEFERRABLE) &&
+        public void report(JCDiagnostic diag) {
+            if (!diag.isFlagSet(JCDiagnostic.DiagnosticFlag.NON_DEFERRABLE) &&
                 (filter == null || filter.accepts(diag))) {
                 deferred.add(diag);
             } else {
@@ -145,18 +145,18 @@ public class Log extends AbstractLog {
             }
         }
 
-        public Queue<com.flint.tools.flintc.util.JCDiagnostic> getDiagnostics() {
+        public Queue<JCDiagnostic> getDiagnostics() {
             return deferred;
         }
 
         /** Report all deferred diagnostics. */
         public void reportDeferredDiagnostics() {
-            reportDeferredDiagnostics(EnumSet.allOf(com.flint.tools.flintc.util.JCDiagnostic.Kind.class));
+            reportDeferredDiagnostics(EnumSet.allOf(JCDiagnostic.Kind.class));
         }
 
         /** Report selected deferred diagnostics. */
-        public void reportDeferredDiagnostics(Set<com.flint.tools.flintc.util.JCDiagnostic.Kind> kinds) {
-            com.flint.tools.flintc.util.JCDiagnostic d;
+        public void reportDeferredDiagnostics(Set<JCDiagnostic.Kind> kinds) {
+            JCDiagnostic d;
             while ((d = deferred.poll()) != null) {
                 if (kinds.contains(d.getKind()))
                     prev.report(d);
@@ -199,7 +199,7 @@ public class Log extends AbstractLog {
     /**
      * Formatter for diagnostics.
      */
-    private DiagnosticFormatter<com.flint.tools.flintc.util.JCDiagnostic> diagFormatter;
+    private DiagnosticFormatter<JCDiagnostic> diagFormatter;
 
     /**
      * Keys for expected diagnostics.
@@ -214,7 +214,7 @@ public class Log extends AbstractLog {
     /**
      * JavacMessages object used for localization.
      */
-    private com.flint.tools.flintc.util.JavacMessages messages;
+    private JavacMessages messages;
 
     /**
      * Handler for initial dispatch of diagnostics.
@@ -222,7 +222,7 @@ public class Log extends AbstractLog {
     private DiagnosticHandler diagnosticHandler;
 
     /** Get the Log instance for this context. */
-    public static Log instance(com.flint.tools.flintc.util.Context context) {
+    public static Log instance(Context context) {
         Log instance = context.get(logKey);
         if (instance == null)
             instance = new Log(context);
@@ -232,8 +232,8 @@ public class Log extends AbstractLog {
     /**
      * Register a Context.Factory to create a Log.
      */
-    public static void preRegister(com.flint.tools.flintc.util.Context context, PrintWriter w) {
-        context.put(Log.class, (com.flint.tools.flintc.util.Context.Factory<Log>) (c -> new Log(c, w)));
+    public static void preRegister(Context context, PrintWriter w) {
+        context.put(Log.class, (Context.Factory<Log>) (c -> new Log(c, w)));
     }
 
     /**
@@ -244,7 +244,7 @@ public class Log extends AbstractLog {
      * it will be used for all output.
      * Otherwise, the log will be initialized to use both streams found in the context.
      */
-    protected Log(com.flint.tools.flintc.util.Context context) {
+    protected Log(Context context) {
         this(context, initWriters(context));
     }
 
@@ -253,7 +253,7 @@ public class Log extends AbstractLog {
      * @param context the context in which to find writers to use
      * @return a map of writers
      */
-    private static Map<WriterKind, PrintWriter> initWriters(com.flint.tools.flintc.util.Context context) {
+    private static Map<WriterKind, PrintWriter> initWriters(Context context) {
         PrintWriter out = context.get(outKey);
         PrintWriter err = context.get(errKey);
         if (out == null && err == null) {
@@ -271,7 +271,7 @@ public class Log extends AbstractLog {
     /**
      * Construct a log with all output sent to a single output stream.
      */
-    protected Log(com.flint.tools.flintc.util.Context context, PrintWriter writer) {
+    protected Log(Context context, PrintWriter writer) {
         this(context, initWriters(writer, writer));
     }
 
@@ -280,7 +280,7 @@ public class Log extends AbstractLog {
      * The log will be initialized to use stdOut for normal output, and stdErr
      * for all diagnostic output.
      */
-    protected Log(com.flint.tools.flintc.util.Context context, PrintWriter out, PrintWriter err) {
+    protected Log(Context context, PrintWriter out, PrintWriter err) {
         this(context, initWriters(out, err));
     }
 
@@ -306,12 +306,12 @@ public class Log extends AbstractLog {
      * Construct a log with given I/O redirections.
      * @deprecated
      * This constructor is provided to support the supported but now-deprecated javadoc entry point
-     *      com.sun.tools.javadoc.Main.execute(String programName,
+     *      com.flint.tools.javadoc.Main.execute(String programName,
      *          PrintWriter errWriter, PrintWriter warnWriter, PrintWriter noticeWriter,
      *          String defaultDocletClassName, String... args)
      */
     @Deprecated
-    protected Log(com.flint.tools.flintc.util.Context context, PrintWriter errWriter, PrintWriter warnWriter, PrintWriter noticeWriter) {
+    protected Log(Context context, PrintWriter errWriter, PrintWriter warnWriter, PrintWriter noticeWriter) {
         this(context, initWriters(errWriter, warnWriter, noticeWriter));
     }
 
@@ -342,7 +342,7 @@ public class Log extends AbstractLog {
      * @param writers a map of writers that can be accessed by the kind of writer required
      */
     private Log(Context context, Map<WriterKind, PrintWriter> writers) {
-        super(com.flint.tools.flintc.util.JCDiagnostic.Factory.instance(context));
+        super(JCDiagnostic.Factory.instance(context));
         context.put(logKey, this);
         this.writers = writers;
 
@@ -353,15 +353,15 @@ public class Log extends AbstractLog {
 
         diagnosticHandler = new DefaultDiagnosticHandler();
 
-        messages = com.flint.tools.flintc.util.JavacMessages.instance(context);
+        messages = JavacMessages.instance(context);
         messages.add(Main.javacBundleName);
 
-        final com.flint.tools.flintc.util.Options options = com.flint.tools.flintc.util.Options.instance(context);
+        final Options options = Options.instance(context);
         initOptions(options);
         options.addListener(() -> initOptions(options));
     }
     // where
-        private void initOptions(com.flint.tools.flintc.util.Options options) {
+        private void initOptions(Options options) {
             this.dumpOnError = options.isSet(DOE);
             this.promptOnError = options.isSet(PROMPT);
             this.emitWarnings = options.isUnset(XLINT_CUSTOM, "none");
@@ -415,12 +415,12 @@ public class Log extends AbstractLog {
      *  error message more than once. For each error, a pair consisting of the
      *  source file name and source code position of the error is added to the set.
      */
-    protected Set<com.flint.tools.flintc.util.Pair<JavaFileObject, Integer>> recorded = new HashSet<>();
+    protected Set<Pair<JavaFileObject, Integer>> recorded = new HashSet<>();
 
     /** A set of "not-supported-in-source-X" errors produced so far. This is used to only generate
      *  one such error per file.
      */
-    protected Set<com.flint.tools.flintc.util.Pair<JavaFileObject, String>>  recordedSourceLevelErrors = new HashSet<>();
+    protected Set<Pair<JavaFileObject, String>>  recordedSourceLevelErrors = new HashSet<>();
 
     public boolean hasDiagnosticListener() {
         return diagListener != null;
@@ -439,13 +439,13 @@ public class Log extends AbstractLog {
 
     /** Get the current diagnostic formatter.
      */
-    public DiagnosticFormatter<com.flint.tools.flintc.util.JCDiagnostic> getDiagnosticFormatter() {
+    public DiagnosticFormatter<JCDiagnostic> getDiagnosticFormatter() {
         return diagFormatter;
     }
 
     /** Set the current diagnostic formatter.
      */
-    public void setDiagnosticFormatter(DiagnosticFormatter<com.flint.tools.flintc.util.JCDiagnostic> diagFormatter) {
+    public void setDiagnosticFormatter(DiagnosticFormatter<JCDiagnostic> diagFormatter) {
         this.diagFormatter = diagFormatter;
     }
 
@@ -494,7 +494,7 @@ public class Log extends AbstractLog {
         if (file == null)
             return true;
 
-        com.flint.tools.flintc.util.Pair<JavaFileObject,Integer> coords = new com.flint.tools.flintc.util.Pair<>(file, pos);
+        Pair<JavaFileObject,Integer> coords = new Pair<>(file, pos);
         boolean shouldReport = !recorded.contains(coords);
         if (shouldReport)
             recorded.add(coords);
@@ -503,7 +503,7 @@ public class Log extends AbstractLog {
 
     /** Returns true if a diagnostics needs to be reported.
      */
-    private boolean shouldReport(com.flint.tools.flintc.util.JCDiagnostic d) {
+    private boolean shouldReport(JCDiagnostic d) {
         JavaFileObject file = d.getSource();
 
         if (file == null)
@@ -515,7 +515,7 @@ public class Log extends AbstractLog {
         if (!d.isFlagSet(DiagnosticFlag.SOURCE_LEVEL))
             return true;
 
-        com.flint.tools.flintc.util.Pair<JavaFileObject, String> coords = new Pair<>(file, d.getCode());
+        Pair<JavaFileObject, String> coords = new Pair<>(file, d.getCode());
         boolean shouldReport = !recordedSourceLevelErrors.contains(coords);
         if (shouldReport)
             recordedSourceLevelErrors.add(coords);
@@ -646,7 +646,7 @@ public class Log extends AbstractLog {
      * @param diagnostic
      */
     @Override
-    public void report(com.flint.tools.flintc.util.JCDiagnostic diagnostic) {
+    public void report(JCDiagnostic diagnostic) {
         diagnosticHandler.report(diagnostic);
      }
 
@@ -657,7 +657,7 @@ public class Log extends AbstractLog {
      */
     private class DefaultDiagnosticHandler extends DiagnosticHandler {
         @Override
-        public void report(com.flint.tools.flintc.util.JCDiagnostic diagnostic) {
+        public void report(JCDiagnostic diagnostic) {
             if (expectDiagKeys != null)
                 expectDiagKeys.remove(diagnostic.getCode());
 
@@ -692,7 +692,7 @@ public class Log extends AbstractLog {
                 }
                 break;
             }
-            if (diagnostic.isFlagSet(com.flint.tools.flintc.util.JCDiagnostic.DiagnosticFlag.COMPRESSED)) {
+            if (diagnostic.isFlagSet(JCDiagnostic.DiagnosticFlag.COMPRESSED)) {
                 compressedOutput = true;
             }
         }
@@ -701,7 +701,7 @@ public class Log extends AbstractLog {
     /**
      * Write out a diagnostic.
      */
-    protected void writeDiagnostic(com.flint.tools.flintc.util.JCDiagnostic diag) {
+    protected void writeDiagnostic(JCDiagnostic diag) {
         if (diagListener != null) {
             diagListener.report(diag);
             return;

@@ -58,8 +58,8 @@ import javax.tools.JavaFileObject;
 import javax.tools.JavaFileObject.Kind;
 import javax.tools.StandardJavaFileManager;
 
-import com.sun.source.util.TaskEvent;
-import com.sun.source.util.TaskListener;
+import com.flint.source.util.TaskEvent;
+import com.flint.source.util.TaskListener;
 import com.flint.tools.flintc.util.ClientCodeException;
 import com.flint.tools.flintc.util.Context;
 import com.flint.tools.flintc.util.DefinedBy;

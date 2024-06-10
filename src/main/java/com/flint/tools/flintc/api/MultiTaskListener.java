@@ -28,8 +28,8 @@ package com.flint.tools.flintc.api;
 import java.util.Arrays;
 import java.util.Collection;
 
-import com.sun.source.util.TaskEvent;
-import com.sun.source.util.TaskListener;
+import com.flint.source.util.TaskEvent;
+import com.flint.source.util.TaskListener;
 import com.flint.tools.flintc.util.Context;
 import com.flint.tools.flintc.util.DefinedBy;
 import com.flint.tools.flintc.util.DefinedBy.Api;

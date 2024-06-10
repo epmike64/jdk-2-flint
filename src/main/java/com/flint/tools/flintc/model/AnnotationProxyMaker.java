@@ -36,7 +36,7 @@ import java.util.Map;
 import com.flint.tools.flintc.code.Attribute;
 import com.flint.tools.flintc.code.Symbol;
 import com.flint.tools.flintc.code.Type;
-import sun.reflect.annotation.*;
+//import sun.reflect.annotation.*;
 
 import javax.lang.model.type.MirroredTypeException;
 import javax.lang.model.type.MirroredTypesException;
@@ -89,8 +89,8 @@ public class AnnotationProxyMaker {
      * Returns a dynamic proxy for an annotation mirror.
      */
     private Annotation generateAnnotation() {
-        return AnnotationParser.annotationForMap(annoType,
-                                                 getAllReflectedValues());
+        return null ; //AnnotationParser.annotationForMap(annoType,
+                               //                  getAllReflectedValues());
     }
 
     /**
@@ -104,7 +104,7 @@ public class AnnotationProxyMaker {
         for (Map.Entry<MethodSymbol, Attribute> entry :
                                                   getAllValues().entrySet()) {
             MethodSymbol meth = entry.getKey();
-            Object value = generateValue(meth, entry.getValue());
+            Object value = null;//generateValue(meth, entry.getValue());
             if (value != null) {
                 res.put(meth.name.toString(), value);
             } else {
@@ -143,115 +143,115 @@ public class AnnotationProxyMaker {
      * Returns an exception proxy on some errors, but may return null if
      * a useful exception cannot or should not be generated at this point.
      */
-    private Object generateValue(MethodSymbol meth, Attribute attr) {
-        ValueVisitor vv = new ValueVisitor(meth);
-        return vv.getValue(attr);
-    }
+//    private Object generateValue(MethodSymbol meth, Attribute attr) {
+//        ValueVisitor vv = new ValueVisitor(meth);
+//        return vv.getValue(attr);
+//    }
 
 
-    private class ValueVisitor implements Attribute.Visitor {
-
-        private MethodSymbol meth;      // annotation element being visited
-        private Class<?> returnClass;   // return type of annotation element
-        private Object value;           // value in "dynamic proxy return form"
-
-        ValueVisitor(MethodSymbol meth) {
-            this.meth = meth;
-        }
-
-        Object getValue(Attribute attr) {
-            Method method;              // runtime method of annotation element
-            try {
-                method = annoType.getMethod(meth.name.toString());
-            } catch (NoSuchMethodException e) {
-                return null;
-            }
-            returnClass = method.getReturnType();
-            attr.accept(this);
-            if (!(value instanceof ExceptionProxy) &&
-                !AnnotationType.invocationHandlerReturnType(returnClass)
-                                                        .isInstance(value)) {
-                typeMismatch(method, attr);
-            }
-            return value;
-        }
-
-
-        public void visitConstant(Attribute.Constant c) {
-            value = c.getValue();
-        }
-
-        public void visitClass(Attribute.Class c) {
-            value = new MirroredTypeExceptionProxy(c.classType);
-        }
-
-        public void visitArray(Attribute.Array a) {
-            Name elemName = ((ArrayType) a.type).elemtype.tsym.getQualifiedName();
-
-            if (elemName.equals(elemName.table.names.java_lang_Class)) {   // Class[]
-                // Construct a proxy for a MirroredTypesException
-                ListBuffer<TypeMirror> elems = new ListBuffer<>();
-                for (Attribute value : a.values) {
-                    Type elem = ((Attribute.Class) value).classType;
-                    elems.append(elem);
-                }
-                value = new MirroredTypesExceptionProxy(elems.toList());
-
-            } else {
-                int len = a.values.length;
-                Class<?> returnClassSaved = returnClass;
-                returnClass = returnClass.getComponentType();
-                try {
-                    Object res = Array.newInstance(returnClass, len);
-                    for (int i = 0; i < len; i++) {
-                        a.values[i].accept(this);
-                        if (value == null || value instanceof ExceptionProxy) {
-                            return;
-                        }
-                        try {
-                            Array.set(res, i, value);
-                        } catch (IllegalArgumentException e) {
-                            value = null;       // indicates a type mismatch
-                            return;
-                        }
-                    }
-                    value = res;
-                } finally {
-                    returnClass = returnClassSaved;
-                }
-            }
-        }
+//    private class ValueVisitor implements Attribute.Visitor {
+//
+//        private MethodSymbol meth;      // annotation element being visited
+//        private Class<?> returnClass;   // return type of annotation element
+//        private Object value;           // value in "dynamic proxy return form"
+//
+//        ValueVisitor(MethodSymbol meth) {
+//            this.meth = meth;
+//        }
+//
+//        Object getValue(Attribute attr) {
+//            Method method;              // runtime method of annotation element
+//            try {
+//                method = annoType.getMethod(meth.name.toString());
+//            } catch (NoSuchMethodException e) {
+//                return null;
+//            }
+//            returnClass = method.getReturnType();
+//            attr.accept(this);
+////            if (!(value instanceof ExceptionProxy) &&
+////                !AnnotationType.invocationHandlerReturnType(returnClass)
+////                                                        .isInstance(value)) {
+////                typeMismatch(method, attr);
+////            }
+//            return value;
+//        }
+//
+//
+//        public void visitConstant(Attribute.Constant c) {
+//            value = c.getValue();
+//        }
+//
+//        public void visitClass(Attribute.Class c) {
+//            value = new MirroredTypeExceptionProxy(c.classType);
+//        }
+//
+//        public void visitArray(Attribute.Array a) {
+////            Name elemName = ((ArrayType) a.type).elemtype.tsym.getQualifiedName();
+////
+////            if (elemName.equals(elemName.table.names.java_lang_Class)) {   // Class[]
+////                // Construct a proxy for a MirroredTypesException
+////                ListBuffer<TypeMirror> elems = new ListBuffer<>();
+////                for (Attribute value : a.values) {
+////                    Type elem = ((Attribute.Class) value).classType;
+////                    elems.append(elem);
+////                }
+////                value = new MirroredTypesExceptionProxy(elems.toList());
+////
+////            } else {
+////                int len = a.values.length;
+////                Class<?> returnClassSaved = returnClass;
+////                returnClass = returnClass.getComponentType();
+////                try {
+////                    Object res = Array.newInstance(returnClass, len);
+////                    for (int i = 0; i < len; i++) {
+////                        a.values[i].accept(this);
+////                        if (value == null )//|| value instanceof ExceptionProxy) {
+////                            return;
+////                        }
+////                        try {
+////                            Array.set(res, i, value);
+////                        } catch (IllegalArgumentException e) {
+////                            value = null;       // indicates a type mismatch
+////                            return;
+////                        }
+////                    }
+////                    value = res;
+////                } finally {
+////                    returnClass = returnClassSaved;
+////                }
+//            }
+//        }
 
         @SuppressWarnings({"unchecked", "rawtypes"})
         public void visitEnum(Attribute.Enum e) {
-            if (returnClass.isEnum()) {
-                String constName = e.value.toString();
-                try {
-                    value = Enum.valueOf((Class)returnClass, constName);
-                } catch (IllegalArgumentException ex) {
-                    value = new EnumConstantNotPresentExceptionProxy(
-                                        (Class<Enum<?>>) returnClass, constName);
-                }
-            } else {
-                value = null;   // indicates a type mismatch
-            }
+//            if (returnClass.isEnum()) {
+//                String constName = e.value.toString();
+//                try {
+//                    value = Enum.valueOf((Class)returnClass, constName);
+//                } catch (IllegalArgumentException ex) {
+//                    value = new EnumConstantNotPresentExceptionProxy(
+//                                        (Class<Enum<?>>) returnClass, constName);
+//                }
+//            } else {
+//                value = null;   // indicates a type mismatch
+//            }
         }
 
         public void visitCompound(Attribute.Compound c) {
-            try {
-                Class<? extends Annotation> nested =
-                    returnClass.asSubclass(Annotation.class);
-                value = generateAnnotation(c, nested);
-            } catch (ClassCastException ex) {
-                value = null;   // indicates a type mismatch
-            }
+//            try {
+//                Class<? extends Annotation> nested =
+//                    returnClass.asSubclass(Annotation.class);
+//                value = generateAnnotation(c, nested);
+//            } catch (ClassCastException ex) {
+//                value = null;   // indicates a type mismatch
+//            }
         }
 
         public void visitError(Attribute.Error e) {
-            if (e instanceof Attribute.UnresolvedClass)
-                value = new MirroredTypeExceptionProxy(((Attribute.UnresolvedClass)e).classType);
-            else
-                value = null;       // indicates a type mismatch
+//            if (e instanceof Attribute.UnresolvedClass)
+//                value = new MirroredTypeExceptionProxy(((Attribute.UnresolvedClass)e).classType);
+//            else
+//                value = null;       // indicates a type mismatch
         }
 
 
@@ -259,7 +259,7 @@ public class AnnotationProxyMaker {
          * Sets "value" to an ExceptionProxy indicating a type mismatch.
          */
         private void typeMismatch(Method method, final Attribute attr) {
-            class AnnotationTypeMismatchExceptionProxy extends ExceptionProxy {
+            class AnnotationTypeMismatchExceptionProxy {//extends ExceptionProxy {
                 static final long serialVersionUID = 269;
                 transient final Method method;
                 AnnotationTypeMismatchExceptionProxy(Method method) {
@@ -273,7 +273,7 @@ public class AnnotationProxyMaker {
                                 attr.type.toString());
                 }
             }
-            value = new AnnotationTypeMismatchExceptionProxy(method);
+           // value = new AnnotationTypeMismatchExceptionProxy(method);
         }
     }
 
@@ -283,84 +283,84 @@ public class AnnotationProxyMaker {
      * The toString, hashCode, and equals methods forward to the underlying
      * type.
      */
-    private static final class MirroredTypeExceptionProxy extends ExceptionProxy {
-        static final long serialVersionUID = 269;
+//    private static final class MirroredTypeExceptionProxy {// extends ExceptionProxy {
+//        static final long serialVersionUID = 269;
+//
+//        private transient TypeMirror type;
+//        private final String typeString;
+//
+//        MirroredTypeExceptionProxy(TypeMirror t) {
+//            type = t;
+//            typeString = t.toString();
+//        }
+//
+//        public String toString() {
+//            return typeString;
+//        }
+//
+//        public int hashCode() {
+//            return (type != null ? type : typeString).hashCode();
+//        }
+//
+//        public boolean equals(Object obj) {
+//            return type != null &&
+//                   obj instanceof MirroredTypeExceptionProxy &&
+//                   type.equals(((MirroredTypeExceptionProxy) obj).type);
+//        }
+//
+//        protected RuntimeException generateException() {
+//            return new MirroredTypeException(type);
+//        }
+//
+//        // Explicitly set all transient fields.
+//        private void readObject(ObjectInputStream s)
+//            throws IOException, ClassNotFoundException {
+//            s.defaultReadObject();
+//            type = null;
+//        }
+//    }
 
-        private transient TypeMirror type;
-        private final String typeString;
 
-        MirroredTypeExceptionProxy(TypeMirror t) {
-            type = t;
-            typeString = t.toString();
-        }
-
-        public String toString() {
-            return typeString;
-        }
-
-        public int hashCode() {
-            return (type != null ? type : typeString).hashCode();
-        }
-
-        public boolean equals(Object obj) {
-            return type != null &&
-                   obj instanceof MirroredTypeExceptionProxy &&
-                   type.equals(((MirroredTypeExceptionProxy) obj).type);
-        }
-
-        protected RuntimeException generateException() {
-            return new MirroredTypeException(type);
-        }
-
-        // Explicitly set all transient fields.
-        private void readObject(ObjectInputStream s)
-            throws IOException, ClassNotFoundException {
-            s.defaultReadObject();
-            type = null;
-        }
-    }
-
-
-    /**
-     * ExceptionProxy for MirroredTypesException.
-     * The toString, hashCode, and equals methods foward to the underlying
-     * types.
-     */
-    private static final class MirroredTypesExceptionProxy extends ExceptionProxy {
-        static final long serialVersionUID = 269;
-
-        private transient JCList<TypeMirror> types;
-        private final String typeStrings;
-
-        MirroredTypesExceptionProxy(JCList<TypeMirror> ts) {
-            types = ts;
-            typeStrings = ts.toString();
-        }
-
-        public String toString() {
-            return typeStrings;
-        }
-
-        public int hashCode() {
-            return (types != null ? types : typeStrings).hashCode();
-        }
-
-        public boolean equals(Object obj) {
-            return types != null &&
-                   obj instanceof MirroredTypesExceptionProxy &&
-                   types.equals(
-                      ((MirroredTypesExceptionProxy) obj).types);
-        }
-
-        protected RuntimeException generateException() {
-            return new MirroredTypesException(types);
-        }
-
-        // Explicitly set all transient fields.
-        private void readObject(ObjectInputStream s)
-            throws IOException, ClassNotFoundException {
-            s.defaultReadObject();
-            types = null;
-        }
-    }
-}
+//    /**
+//     * ExceptionProxy for MirroredTypesException.
+//     * The toString, hashCode, and equals methods foward to the underlying
+//     * types.
+//     */
+//    private static final class MirroredTypesExceptionProxy {//extends ExceptionProxy {
+//        static final long serialVersionUID = 269;
+//
+//        private transient JCList<TypeMirror> types;
+//        private final String typeStrings;
+//
+//        MirroredTypesExceptionProxy(JCList<TypeMirror> ts) {
+//            types = ts;
+//            typeStrings = ts.toString();
+//        }
+//
+//        public String toString() {
+//            return typeStrings;
+//        }
+//
+//        public int hashCode() {
+//            return (types != null ? types : typeStrings).hashCode();
+//        }
+//
+//        public boolean equals(Object obj) {
+//            return types != null &&
+//                   obj instanceof MirroredTypesExceptionProxy &&
+//                   types.equals(
+//                      ((MirroredTypesExceptionProxy) obj).types);
+//        }
+//
+//        protected RuntimeException generateException() {
+//            return new MirroredTypesException(types);
+//        }
+//
+//        // Explicitly set all transient fields.
+//        private void readObject(ObjectInputStream s)
+//            throws IOException, ClassNotFoundException {
+//            s.defaultReadObject();
+//            types = null;
+//        }
+    //}
+//}

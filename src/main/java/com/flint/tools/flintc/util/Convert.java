@@ -24,7 +24,7 @@
  */
 
 package com.flint.tools.flintc.util;
-
+import com.flint.tools.flintc.util.Name;
 /** Utility class for static conversion methods between numbers
  *  and strings in various formats.
  *
@@ -317,7 +317,7 @@ public class Convert {
     /** Return the package name of a class name, excluding the trailing '.',
      *  "" if not existent.
      */
-    public static com.flint.tools.flintc.util.Name packagePart(com.flint.tools.flintc.util.Name classname) {
+    public static Name packagePart(Name classname) {
         return classname.subName(0, classname.lastIndexOf((byte)'.'));
     }
 
@@ -326,7 +326,7 @@ public class Convert {
         return (lastDot < 0 ? "" : classname.substring(0, lastDot));
     }
 
-    public static JCList<Name> enclosingCandidates(com.flint.tools.flintc.util.Name name) {
+    public static JCList<Name> enclosingCandidates(Name name) {
         JCList<Name> names = JCList.nil();
         int index;
         while ((index = name.lastIndexOf((byte)'$')) > 0) {
@@ -336,7 +336,7 @@ public class Convert {
         return names;
     }
 
-    public static JCList<Name> classCandidates(com.flint.tools.flintc.util.Name name) {
+    public static JCList<Name> classCandidates(Name name) {
         JCList<Name> names = JCList.nil();
         String nameStr = name.toString();
         int index = -1;

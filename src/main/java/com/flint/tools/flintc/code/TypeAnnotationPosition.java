@@ -37,7 +37,7 @@ import com.flint.tools.flintc.util.*;
 *  This code and its internal interfaces are subject to change or
 *  deletion without notice.</b>
 */
-// Code duplicated in com.sun.tools.classfile.TypeAnnotation.Position
+// Code duplicated in com.flint.tools.classfile.TypeAnnotation.Position
 public class TypeAnnotationPosition {
 
     public enum TypePathEntryKind {

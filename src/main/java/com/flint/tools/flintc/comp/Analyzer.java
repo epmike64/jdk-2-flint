@@ -29,7 +29,7 @@ import com.flint.tools.flintc.code.Source;
 import com.flint.tools.flintc.code.Type;
 import com.flint.tools.flintc.code.Types;
 import com.flint.tools.flintc.tree.*;
-import com.sun.source.tree.LambdaExpressionTree;
+import com.flint.source.tree.LambdaExpressionTree;
 import com.flint.tools.flintc.tree.JCTree.JCBlock;
 import com.flint.tools.flintc.tree.JCTree.JCClassDecl;
 import com.flint.tools.flintc.tree.JCTree.JCDoWhileLoop;

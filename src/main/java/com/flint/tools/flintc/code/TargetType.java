@@ -41,7 +41,7 @@ import com.flint.tools.flintc.util.Assert;
  *  This code and its internal interfaces are subject to change or
  *  deletion without notice.</b>
  */
-// Code duplicated in com.sun.tools.classfile.TypeAnnotation.TargetType
+// Code duplicated in com.flint.tools.classfile.TypeAnnotation.TargetType
 public enum TargetType {
     /** For annotations on a class type parameter declaration. */
     CLASS_TYPE_PARAMETER(0x00),

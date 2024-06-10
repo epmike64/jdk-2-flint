@@ -82,7 +82,7 @@ import com.flint.tools.flintc.tree.TreeInfo;
 import com.flint.tools.flintc.tree.TreeMaker;
 import com.flint.tools.flintc.tree.TreeScanner;
 import com.flint.tools.flintc.tree.TreeTranslator;
-import com.sun.source.util.TaskEvent;
+import com.flint.source.util.TaskEvent;
 import com.flint.tools.flintc.code.Lint.LintCategory;
 import com.flint.tools.flintc.code.Symbol.ClassSymbol;
 import com.flint.tools.flintc.code.Symbol.CompletionFailure;
@@ -711,7 +711,7 @@ public class JavaCompiler {
             msym = moduleFinder.findModule(modName);
             typeName = name.substring(sep + 1);
         } else {
-            log.error(Errors.InvalidModuleSpecifier(name));
+           // log.error(Errors.InvalidModuleSpecifier(name));
             return silentFail;
         }
 
@@ -1255,7 +1255,7 @@ public class JavaCompiler {
                             log.warning(Warnings.ProcPackageDoesNotExist(nameStr));
                             pckSymbols = pckSymbols.prepend((PackageSymbol)sym);
                         } catch (CompletionFailure e) {
-                            log.error(Errors.ProcCantFindClass(nameStr));
+                            //log.error(Errors.ProcCantFindClass(nameStr));
                             errors = true;
                             continue;
                         }

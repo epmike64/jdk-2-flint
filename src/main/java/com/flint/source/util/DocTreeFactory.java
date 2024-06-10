@@ -26,7 +26,7 @@
 package com.flint.source.util;
 
 import com.flint.source.doctree.*;
-import com.sun.source.doctree.AttributeTree.ValueKind;
+import com.flint.source.doctree.AttributeTree.ValueKind;
 
 import javax.lang.model.element.Name;
 import javax.tools.Diagnostic;

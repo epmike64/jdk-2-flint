@@ -54,7 +54,7 @@ import com.flint.tools.flintc.jvm.Profile;
 import com.flint.tools.flintc.jvm.Target;
 import com.flint.tools.flintc.platform.PlatformProvider;
 import com.flint.tools.flintc.processing.JavacProcessingEnvironment;
-//import com.sun.tools.doclint.DocLint;
+//import com.flint.tools.doclint.DocLint;
 import com.flint.tools.flintc.code.Lint.LintCategory;
 import com.flint.tools.flintc.util.Assert;
 import com.flint.tools.flintc.util.JDK9Wrappers;

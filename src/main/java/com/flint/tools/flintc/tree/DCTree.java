@@ -25,7 +25,7 @@
 
 package com.flint.tools.flintc.tree;
 
-import com.sun.source.doctree.*;
+import com.flint.source.doctree.*;
 import com.flint.tools.flintc.parser.Tokens.Comment;
 import com.flint.tools.flintc.util.*;
 import com.flint.tools.flintc.util.DefinedBy.Api;

@@ -46,7 +46,7 @@ import com.flint.tools.flintc.util.Assert;
  *
  * @author Jonathan Gibbons;
  */
-public class JavacScope implements com.sun.source.tree.Scope {
+public class JavacScope implements com.flint.source.tree.Scope {
 
     static JavacScope create(Env<AttrContext> env) {
         if (env.outer == null || env.outer == env) {
