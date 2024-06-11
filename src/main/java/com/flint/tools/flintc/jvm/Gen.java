@@ -128,15 +128,15 @@ public class Gen extends JCTree.Visitor {
         lower = Lower.instance(context);
 
         Options options = Options.instance(context);
-        lineDebugInfo =
-            options.isUnset(G_CUSTOM) ||
-            options.isSet(G_CUSTOM, "lines");
-        varDebugInfo =
-            options.isUnset(G_CUSTOM)
-            ? options.isSet(G)
-            : options.isSet(G_CUSTOM, "vars");
+        lineDebugInfo = true;
+//            options.isUnset(G_CUSTOM) ||
+//            options.isSet(G_CUSTOM, "lines");
+        varDebugInfo = true;
+//            options.isUnset(G_CUSTOM)
+//            ? options.isSet(G)
+//            : options.isSet(G_CUSTOM, "vars");
         genCrt = options.isSet(XJCOV);
-        debugCode = options.isSet("debug.code");
+        debugCode = true;//options.isSet("debug.code");
         allowBetterNullChecks = target.hasObjects();
         pool = new Pool(types);
 
